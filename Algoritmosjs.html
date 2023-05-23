@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Algoritmos</title>
+</head>
+<body>
+    <h1>Algoritmos</h1>
+    
+    <h2>Fibonacci</h2>
+    <button onclick="executeFibonacci()">Calcular Fibonacci(12)</button>
+    <p id="fibonacciResult"></p>
+    
+    <h2>MDC</h2>
+    <button onclick="executeMDC()">Calcular MDC(5, 10)</button>
+    <p id="mdcResult"></p>
+    
+    <h2>Contagem de Números Inteiros</h2>
+    <button onclick="executeIntegerCount()">Contar números inteiros</button>
+    <p id="integerCountResult"></p>
+    
+    <h2>Números Primos</h2>
+    <button onclick="executePrimeNumbers()">Exibir números primos até 45</button>
+    <p id="primeNumbersResult"></p>
+    
+    <h2>Soma de Números</h2>
+    <button onclick="executeSum()">Calcular soma de números</button>
+    <p id="sumResult"></p>
+
+    <script>
+        function executeFibonacci() {
+            let cache = {};
+
+            const fibonacci = n => {
+                if (n <= 1) {
+                    return n;
+                }
+
+                if (cache[n]) {
+                    return cache[n];
+                }
+
+                const result = fibonacci(n - 1) + fibonacci(n - 2);
+
+                cache[n] = result;
+
+                return result;
+            };
+
+            const result = fibonacci(12);
+
+            document.getElementById("fibonacciResult").innerText = `Resultado: ${result}`;
+        }
+
+        function executeMDC() {
+            function calcularMDC(num1, num2) {
+                var resto, x, y;
+                x = num1;
+                y = num2;
+                while (resto != 0) {
+                    resto = x % y;
+                    x = y;
+                    y = resto;
+                }
+                return (num1 * num2) / x;
+            }
+
+            var resultado = calcularMDC(5, 10);
+
+            document.getElementById("mdcResult").innerText = `Resultado: ${resultado}`;
+        }
+
+        function executeIntegerCount() {
+            function countIntegersBetweenFirstAndN(N, dataSet) {
+                let count = 0;
+                const firstValue = dataSet[0];
+
+                for (let i = firstValue; i <= N; i++) {
+                    if (Number.isInteger(i) && dataSet.includes(i)) {
+                        count++;
+                    }
+                }
+
+                return count;
+            }
+
+            const dataSet = [0, 2, 6.4, 7, 8];
+            const N = 20;
+            const integerCount = countIntegersBetweenFirstAndN(N, dataSet);
+
+            document.getElementById("integerCountResult").innerText = `Há ${integerCount} números inteiros entre ${dataSet[0]} e ${N}.`;
+        }
+
+        function executePrimeNumbers() {
+            function primeNumber(num) {
+                for (var divisor = 2; divisor < num; divisor++)
+                    if (num % divisor == 0) return false;
+                return true;
+            }
+
+            var determinadoNumero = 45;
+            var primeNumbers = [];
+
+            for (var i = 2; i < determinadoNumero; i++) {
+                if (primeNumber(i)) {
+                    primeNumbers.push(i);
+                }
+            }
+
+            document.getElementById("primeNumbersResult").innerText = `Números primos até ${determinadoNumero}: ${primeNumbers.join(', ')}`;
+        }
+
+        function executeSum() {
+            function sum(input){
+                if (toString.call(input) !== "[object Array]")
+                   return false;
+                     
+                var total =  0;
+                for(var i=0;i<input.length;i++)
+                {                  
+                    if(isNaN(input[i])){
+                        continue;
+                    }
+                    total += Number(input[i]);
+                }
+                return total;
+            }
+
+            const result = sum([8, 9, 190]);
+
+            document.getElementById("sumResult").innerText = `Resultado: ${result}`;
+        }
+    </script>
+</body>
+</html>
